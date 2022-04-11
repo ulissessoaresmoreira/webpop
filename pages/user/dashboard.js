@@ -1,4 +1,14 @@
-import {Button, Container, Typography} from '@material-ui/core'
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Container,
+  Grid,
+  Typography
+} from '@material-ui/core'
+
 import { makeStyles } from '@material-ui/core/styles'
 import { Block } from '@material-ui/icons'
 import TemplateDefault from '../../src/templates/Default'
@@ -10,6 +20,9 @@ const useStyles = makeStyles((theme) =>({
   buttonAdd:{
     margin: '30px auto',
     display: 'block',
+  },
+  cardMedia:{
+    paddingTop: '56%',    
   }
 }))
 
@@ -22,6 +35,73 @@ export default function Home() {
           Meus Anúncios
         </Typography>
         <Button variant="contained" color='primary' className={classes.buttonAdd}>Publicar novo anúncio</Button>
+      </Container>
+      <Container maxWidth="md">
+        <Grid container spacing={4}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Card >
+              <CardMedia
+                className={classes.cardMedia}                
+                image={'https://pt.depositphotos.com/557801920/stock-photo-lviv-ukraine-march-2022-territorial.html'}
+                title={"Título da imagem"}
+              />
+              <CardContent>
+                <Typography component="h2" variant="h5">
+                  Produto X
+                </Typography>
+                <Typography>
+                  R$ 60,00
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small" color="primary">Editar</Button>
+                <Button size="small" color="primary">Remover</Button>
+              </CardActions>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Card >
+              <CardMedia
+                className={classes.cardMedia}                
+                image={'https://source.unplash.com/random'}
+                title={"Título da imagem"}
+              />
+              <CardContent>
+                <Typography component="h2" variant="h5">
+                  Produto X
+                </Typography>
+                <Typography>
+                  R$ 60,00
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small" color="primary">Editar</Button>
+                <Button size="small" color="primary">Remover</Button>
+              </CardActions>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Card >
+              <CardMedia
+                className={classes.cardMedia}                
+                image={'https://source.unplash.com/random'}
+                title={"Título da imagem"}
+              />
+              <CardContent>
+                <Typography component="h2" variant="h5">
+                  Produto X
+                </Typography>
+                <Typography>
+                  R$ 60,00
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small" color="primary">Editar</Button>
+                <Button size="small" color="primary">Remover</Button>
+              </CardActions>
+            </Card>
+          </Grid>        
+        </Grid>
       </Container>    
     </TemplateDefault>
   )
