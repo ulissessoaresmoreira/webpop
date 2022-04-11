@@ -16,6 +16,7 @@ export default function MyApp(props) {
   return (
     <React.Fragment>
       <Head>
+        
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>
