@@ -46,7 +46,7 @@ export default function Home() {
                 title={"Título da imagem"}
               />
               <CardContent>
-                <Typography component="h2" variant="h5">
+                <Typography component="h2" variant="h5" textprimary>
                   Produto X
                 </Typography>
                 <Typography>
@@ -70,7 +70,7 @@ export default function Home() {
                 <Typography component="h2" variant="h5">
                   Produto X
                 </Typography>
-                <Typography>
+                <Typography textprimary>
                   R$ 60,00
                 </Typography>
               </CardContent>
@@ -88,10 +88,10 @@ export default function Home() {
                 title={"Título da imagem"}
               />
               <CardContent>
-                <Typography component="h2" variant="h5">
+                <Typography component="h2" variant="h5" textprimary>
                   Produto X
                 </Typography>
-                <Typography>
+                <Typography textprimary>
                   R$ 60,00
                 </Typography>
               </CardContent>
