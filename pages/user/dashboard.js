@@ -42,7 +42,7 @@ export default function Home() {
             <Card >
               <CardMedia
                 className={classes.cardMedia}                
-                image={'https://pt.depositphotos.com/557801920/stock-photo-lviv-ukraine-march-2022-territorial.html'}
+                image={'url(https://source.unsplash.com/random)'}
                 title={"Título da imagem"}
               />
               <CardContent>
@@ -63,7 +63,7 @@ export default function Home() {
             <Card >
               <CardMedia
                 className={classes.cardMedia}                
-                image={'https://source.unplash.com/random'}
+                image={'url(https://source.unsplash.com/random)'}
                 title={"Título da imagem"}
               />
               <CardContent>
@@ -84,7 +84,7 @@ export default function Home() {
             <Card >
               <CardMedia
                 className={classes.cardMedia}                
-                image={'https://source.unplash.com/random'}
+                image={'url(https://source.unsplash.com/random)'}
                 title={"Título da imagem"}
               />
               <CardContent>
