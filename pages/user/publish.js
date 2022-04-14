@@ -1,10 +1,22 @@
-import { Box, Button, Container, IconButton, Select, TextField, Typography } from '@material-ui/core'
+import { useState } from 'react'
+
+import {
+    Box,
+    Button,
+    Container,
+    IconButton,
+    Select,
+    TextField,
+    Typography 
+} from '@material-ui/core'
+
+import { useDropzone } from 'react-dropzone'
 import { makeStyles } from '@material-ui/core'
 import { DeleteForever } from '@material-ui/icons'
 import TemplateDefault from '../../src/templates/Default'
- 
+
 const useStyles = makeStyles((theme) => ({
-    mainImage: {},
+    
     mask: {},
     container: {
         padding: theme.spacing(8, 0, 6)
@@ -18,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     },
     thumbsContainer: {
         display: 'flex',
+        flexWrap: 'wrap',
         marginTop: 15,        
     },
     dropzone: {
@@ -30,22 +43,15 @@ const useStyles = makeStyles((theme) => ({
         width: 200,
         height: 150,
         backgroundColor: theme.pallet.background.default,
-        border: '2px dashed black', 
+        border: '2px dashed black',        
     },
     thumb: {
         position: 'relative',
+        margin: '0 15px 15px 0',
         width: 200,
         height: 150,
         backgroundSize: 'cover',
         backgroundPosition: 'center center',
-
-        '$ $mainImage':{
-            position: 'absolute',
-            bottom: '0',
-            left: '0',
-            backgroundColor: 'blue',
-            padding: '6px 10px',
-        },
 
         '&:hover $mask': {
             display: 'flex',            
@@ -59,12 +65,38 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
             width: '100%',
             height: '100%',
-        }
+        },
+    
+    },
+    mainImage: {
+        position: 'absolute',
+        bottom: '0',
+        left: '0',
+        backgroundColor: 'blue',
+        padding: '5px 8px',
+        color:'white',        
     },    
 }))
 
 const Publish = () =>{
     const classes = useStyles()
+    const [files, setFiles] = useState([])
+
+    const { getRootProps, getInputProps } = useDropzone({
+        accept: 'image/*',
+        onDrop: (acceptedFiles) =>{
+            const newFiles = acceptedFiles.map(file => {
+                return Object.assign(file, {
+                    preview: URL.createObjectURL(file)
+                })
+            })
+            
+            setFiles([
+                ...files,
+                ...newFiles,
+            ])
+        }
+    })
 
     return(
         <>
@@ -129,25 +161,38 @@ const Publish = () =>{
                             A primeira imagem é a foto principal do seu anúncio. Arrasta e larga imagens para alterares a ordem.
                         </Typography>
                         <Box className={classes.thumbsContainer}>
-                            <Box className={classes.dropzone}>
+                            <Box className={classes.dropzone} {...getRootProps()}>
+                                <input {...getInputProps()} />
                                 <Typography variant="body2" color="textPrimary" >
                                     Adicionar Imagem
                                 </Typography>
                             </Box>
-                            <Box 
-                                className={classes.thumb}
-                                style={{backgroundImage: 'url(https://source.unsplash.com/random)' }}
-                            >
-                                <Box className={classes.mainImage}>
-                                    <Typography variant="body2" color='textSecondary'>Principal</Typography>
-                                </Box>
-                                <Box className={classes.mask}>
-                                    <IconButton color="secondary">
-                                        <DeleteForever fontSize='large'/>
-                                    </IconButton>
-                                </Box>
 
-                            </Box>
+                            {
+                                files.map((file, index) => (
+                                    <Box 
+                                        key={file.name}
+                                        className={classes.thumb}
+                                        style={{backgroundImage: `url(${file.preview})` }}
+                                    >
+                                        {
+                                            index === 0 ?
+                                                <Box className={classes.mainImage}>
+                                                    <Typography variant="body2" >Principal</Typography>
+                                                </Box>
+                                            : null
+                                        }
+                                        <Box className={classes.mask}>
+                                            <IconButton color="secondary">
+                                                <DeleteForever fontSize='large'/>
+                                            </IconButton>
+                                        </Box>
+
+                                    </Box>
+
+                                ))
+                            }
+
                             
                         </Box>
 
