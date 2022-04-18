@@ -10,12 +10,11 @@ import {
 } from '@material-ui/core'
 
 import { makeStyles } from '@material-ui/core/styles'
-import { Block } from '@material-ui/icons'
 import TemplateDefault from '../../src/templates/Default'
 
 const useStyles = makeStyles((theme) =>({
   container:{
-    padding: theme.spacing(8, 0, 6)
+    padding: theme.spacing(8, 0, 6),
   },
   buttonAdd:{
     margin: '30px auto',
@@ -42,7 +41,7 @@ export default function Home() {
             <Card >
               <CardMedia
                 className={classes.cardMedia}                
-                image={'url(https://source.unsplash.com/random)'}
+                image={'https://source.unsplash.com/random'}
                 title={"Título da imagem"}
               />
               <CardContent>
@@ -63,7 +62,7 @@ export default function Home() {
             <Card >
               <CardMedia
                 className={classes.cardMedia}                
-                image={'url(https://source.unsplash.com/random)'}
+                image={'https://source.unsplash.com/random'}
                 title={"Título da imagem"}
               />
               <CardContent>
@@ -84,7 +83,7 @@ export default function Home() {
             <Card >
               <CardMedia
                 className={classes.cardMedia}                
-                image={'url(https://source.unsplash.com/random)'}
+                image={'https://source.unsplash.com/random'}
                 title={"Título da imagem"}
               />
               <CardContent>
