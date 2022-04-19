@@ -21,14 +21,16 @@ import { AccountCircle } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    flexGrow: 1,
-    letterSpacing: 8,
+    flexGrow: 1,    
   },
   avatarIcon: {
     marginRight: 6
   },
   logo: {
-    textDecoration: 'none',    
+    textDecoration: 'none',
+    color: 'white',
+    fontSize: '28px',
+    letterSpacing: 8,    
   },
   divider: {
     margin: '8px 0'
@@ -49,8 +51,8 @@ export default function ButtonAppBar() {
           <Toolbar>
             
             <Typography variant="h6" component="div" className={classes.title}>
-              <Link href="/" passHref className={classes.logo}>
-                WebPoP
+              <Link href="/">                
+                  <a className={classes.logo}> WebPoP </a>                
               </Link>
             </Typography>
             <Link href="/user/publish" passHref>
