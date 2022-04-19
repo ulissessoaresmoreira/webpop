@@ -54,7 +54,7 @@ const Home = () => {
                         </IconButton>
                     </Paper>
                 </Container>
-                <Container maxWidth="md" className={classes.grid}>
+                <Container maxWidth="lg" className={classes.grid}>
                     <Typography constant="h2" variant="h4" align="center" color="textPrimary">
                         Destaques
                     </Typography>

@@ -1,32 +1,99 @@
-import * as React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Box from '@material-ui/core/Box';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/core/Menu';
+import * as React from 'react'
+import {useState} from 'react'
+import {makeStyles} from '@material-ui/core/styles'
+import Link from 'next/link'
+
+import {  
+  AppBar,  
+  Container,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Avatar,
+  Menu,
+  MenuItem,
+  Divider,    
+} from '@material-ui/core'
+
+import { AccountCircle } from '@material-ui/icons'
+
+
+const useStyles = makeStyles((theme) => ({
+  title: {
+    flexGrow: 1,
+    letterSpacing: 8,
+  },
+  avatarIcon: {
+    marginRight: 6
+  },
+  logo: {
+    textDecoration: 'none',    
+  },
+  divider: {
+    margin: '8px 0'
+  }
+}))
 
 export default function ButtonAppBar() {
+  const classes = useStyles()
+  const [anchorUserMenu, setAnchorUserMenu] = useState(false)
+
+  const openUserMenu = Boolean(anchorUserMenu)
+
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
+    <>
+      <AppBar position="static" elevation={3}>
+        <Container maxWidth="lg">
+          <Toolbar>
+            
+            <Typography variant="h6" component="div" className={classes.title}>
+              <Link href="/" passHref className={classes.logo}>
+                WebPoP
+              </Link>
+            </Typography>
+            <Link href="/user/publish" passHref>
+              <Button color="inherit" variant="outlined">
+                Anunciar e vender
+              </Button>
+            </Link>
+            <IconButton color="secondary" onClick={(e) => setAnchorUserMenu(e.currentTarget)} >
+              {
+                true === true
+                ?<Avatar className={classes.avatarIcon} src=""/>
+                :<AccountCircle className={classes.avatarIcon} />
+              }
+              <Typography component="h5" variant="subtitle1" color="textPrimary">
+                Ulisses Soares
+              </Typography>
+            </IconButton>
+            <Menu 
+              anchorEl={anchorUserMenu}
+              id="account-menu"
+              open={openUserMenu}
+              onClose={() => setAnchorUserMenu(null)}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+
+              
+              
+            >
+              <Link href="/user/dashboard" passHref>
+                <MenuItem>Meus Anúncios</MenuItem>
+              </Link>
+              <Link href="/user/publish" passHref>
+                <MenuItem>Publicar novo anúncio</MenuItem>
+              </Link>
+              <Divider className={classes.divider}/>
+              <MenuItem>Sair</MenuItem>
+            </Menu>
+          </Toolbar>
+        </Container>
+        
       </AppBar>
-    </Box>
-  );
+    </>
+  )
 }
