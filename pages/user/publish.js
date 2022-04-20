@@ -23,11 +23,12 @@ const useStyles = makeStyles((theme) => ({
     
     mask: {},
     container: {
-        padding: theme.spacing(8, 0, 6)
+        padding: theme.spacing(8, 0, 6),        
     },
     box: {
         backgroundColor: theme.pallet.background.white,
         padding: theme.spacing(3),
+        marginTop: 50,
     },    
     thumbsContainer: {
         display: 'flex',
