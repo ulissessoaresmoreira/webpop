@@ -4,8 +4,7 @@ import Link from 'next/link'
 
 const useStyles = makeStyles ((theme) => ({
     footer:{
-        borderTop: `1px solid ${theme.palette.divider}`,
-        marginTop: theme.spacing(8),
+        borderTop: `1px solid ${theme.palette.divider}`,        
         paddingTop: theme.spacing(3),
         paddingBottom: theme.spacing(3),
         [theme.breakpoints.up('sm')]: {

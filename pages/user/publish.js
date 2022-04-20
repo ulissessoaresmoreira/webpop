@@ -28,10 +28,7 @@ const useStyles = makeStyles((theme) => ({
     box: {
         backgroundColor: theme.pallet.background.white,
         padding: theme.spacing(3),
-    },
-    boxContainer: {
-        paddingBottom: theme.spacing(3)
-    },
+    },    
     thumbsContainer: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -110,7 +107,7 @@ const Publish = () =>{
     return(
         <>
             <TemplateDefault>
-                <Container maxWidth="sm" className={classes.container}>
+                <Container maxWidth="sm">
                     <Typography component="h1" variant="h2" align="center" color="textprimary">
                         Publicar Anúncio
                     </Typography>

@@ -17,10 +17,6 @@ import { makeStyles } from '@material-ui/core'
 
 
 const useStyles = makeStyles((theme) => ({   
-    
-    searchContainer: {
-        padding: theme.spacing(8, 0, 6)
-    },
     searchBox: {
         display: 'flex',
         justifyContent: 'center',
@@ -40,7 +36,7 @@ const Home = () => {
     return (
         <>
             <TemplateDefault>
-                <Container maxWidth="md" className={classes.searchContainer}>
+                <Container maxWidth="md">
                     <Typography constant="h1" variant="h3" align="center" color="textPrimary">
                         O que deseja encontrar?
                     </Typography>
