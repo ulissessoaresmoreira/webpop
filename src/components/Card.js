@@ -25,7 +25,7 @@ const Card = ({ image, title, subtitle, actions, outraInfo}) => {
                 title={title}
             />
             <CardContent>
-                <Typography component="h2" variant="h5" textprimary>
+                <Typography component="h2" variant="h5" color="textprimary">
                     {title}
                 </Typography>
                 <Typography>
