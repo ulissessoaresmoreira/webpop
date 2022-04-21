@@ -1,6 +1,19 @@
-import { Avatar, Box, Card, CardHeader, CardMedia, Chip, Container, Grid, Typography } from '@material-ui/core'
+import React from 'react'
+
+import {
+    Avatar,
+    Box,
+    Card,
+    CardHeader,
+    CardMedia,
+    Chip,
+    Container,
+    Grid,
+    Typography
+} from '@material-ui/core'
 
 import { makeStyles } from '@material-ui/core/styles'
+import Carousel from 'react-material-ui-carousel'
 import TemplateDefault from '../src/templates/Default'
 
 const useStyles = makeStyles((theme) => ({
@@ -15,6 +28,12 @@ const useStyles = makeStyles((theme) => ({
     price: {
         fontWeight: 'bold',
         marginBottom: 15,
+    },
+    card: {
+        
+    },
+    cardMedia: {
+        paddingTop: '56%'
     }
 }))
 
@@ -29,7 +48,22 @@ const Product = () =>{
                     <Grid container spacing={8}>
                         <Grid item xs={8}>
                             <Box className={classes.box}>
-                                Carrossel
+                                <Carousel>
+                                    <Card className={classes.card}>
+                                        <CardMedia
+                                            className={classes.cardMedia}
+                                            image="https://source.unsplash.com/random?=0"
+                                            title="Título da imagem"
+                                        />
+                                    </Card>
+                                    <Card className={classes.card}>
+                                        <CardMedia
+                                            className={classes.cardMedia}
+                                            image="https://source.unsplash.com/random?=1"
+                                            title="Título da imagem"
+                                        />
+                                    </Card>
+                                </Carousel>
                             </Box>
                             <Box className={classes.box} textAlign="left">
                                 <Typography component="span" variant="capition" >Publicado 21 de abril de 2022</Typography>
@@ -40,7 +74,7 @@ const Product = () =>{
                             <Box className={classes.box} textAlign="left">
                                 <Typography component="h6" variant="h6" >Descrição</Typography>
                                 <Typography component="p" variant="body2" >
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                                 </Typography>
                             </Box>
                         </Grid>
