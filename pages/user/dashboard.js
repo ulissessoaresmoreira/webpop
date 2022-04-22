@@ -5,6 +5,8 @@ import {
   Typography
 } from '@material-ui/core'
 
+import Link from 'next/link'
+
 import { makeStyles } from '@material-ui/core/styles'
 import TemplateDefault from '../../src/templates/Default'
 
@@ -15,6 +17,7 @@ const useStyles = makeStyles((theme) =>({
   buttonAdd:{
     margin: '30px auto',
     display: 'block',
+    width: 220,
   }, 
 }))
 
@@ -26,7 +29,11 @@ export default function Home() {
         <Typography component="h1" variant="h2" align='center'>
           Meus Anúncios
         </Typography>
-        <Button variant="contained" color='primary' className={classes.buttonAdd}>Publicar novo anúncio</Button>
+        <Link href="/user/publish" passHref> 
+          <Button variant="contained" color='primary' className={classes.buttonAdd}>
+            Publicar novo Anúncio
+          </Button>
+        </Link>
       </Container>
       <Container maxWidth="md">
         <Grid container spacing={4}>
