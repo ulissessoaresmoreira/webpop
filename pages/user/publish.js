@@ -6,10 +6,12 @@ import {
     Box,
     Button,
     Container,
-    FormControl,
+    FormControl,    
+    FormHelperText,    
     IconButton,
     InputAdornment,
     InputLabel,
+    MenuItem,
     OutlinedInput,
     Select,
     TextField,
@@ -90,9 +92,12 @@ const useStyles = makeStyles((theme) => ({
 
 const validationSchema = yup.object().shape({
     title: yup.string()
-    .min(6, 'Digite pelo menos 6 caracteres')
-    .max(100, 'Digite no máximo 100 caracteres')
-    .required('Campo obrigatório'),
+        .min(6, 'Digite pelo menos 6 caracteres')
+        .max(100, 'Digite no máximo 100 caracteres')
+        .required('Campo obrigatório'),
+    category: yup.string()
+        .required('Campo obrigatório')
+
 })
 
 const Publish = () =>{
@@ -125,7 +130,8 @@ const Publish = () =>{
             <TemplateDefault>
                 <Formik
                     initialValues={{
-                        title: ''
+                        title: '',
+                        category: '',
                     }}
                     validationSchema={validationSchema}
                     onSubmit={(values) => {
@@ -170,32 +176,36 @@ const Publish = () =>{
                                             <Typography component="h6" variant="h6" align="left" color="textPrimary">
                                                 Categoria
                                             </Typography>
-                                            <Select 
-                                                native
-                                                value=""
+                                            <FormControl
                                                 fullWidth
-                                                onChange={() => {}}
-                                                inputProps={{
-                                                    name: 'age',
-                                                }}
-                                                >
-                                                <option value="">Selecione</option>
-                                                <option value={1}>Bebê e Criança</option>
-                                                <option value={2}>Agricultura</option>
-                                                <option value={3}>Moda</option>
-                                                <option value={4}>Carros, Motos e Barcos</option>
-                                                <option value={5}>Serviços</option>
-                                                <option value={6}>Lazer</option>
-                                                <option value={7}>Animais</option>
-                                                <option value={8}>Móveis, Casa e Jardim</option>
-                                                <option value={9}>Imóveis</option>
-                                                <option value={10}>Equipamentos e Ferramentas</option>
-                                                <option value={11}>Telemóveis e Tablets</option>
-                                                <option value={12}>Desporto</option>
-                                                <option value={13}>Tecnologia</option>
-                                                <option value={14}>Emprego</option>
-                                                <option value={15}>Outros</option>
-                                            </Select>
+                                                errors={errors.category}
+                                            >
+                                                <Select 
+                                                    name="category"
+                                                    values={values.category}
+                                                    fullWidth                                                    
+                                                    onChange={handleChange}                                                   
+                                                    >                                                    
+                                                    <MenuItem value="Bebê e Criança">Bebê e Criança</MenuItem>
+                                                    <MenuItem value="Agricultura">Agricultura</MenuItem>
+                                                    <MenuItem value="Moda">Moda</MenuItem>
+                                                    <MenuItem value="Carros, Motos e Barcos">Carros, Motos e Barcos</MenuItem>
+                                                    <MenuItem value="Serviços">Serviços</MenuItem>
+                                                    <MenuItem value="Lazer">Lazer</MenuItem>
+                                                    <MenuItem value="Animais">Animais</MenuItem>
+                                                    <MenuItem value="Móveis, Casa e Jardim">Móveis, Casa e Jardim</MenuItem>
+                                                    <MenuItem value="Imóveis">Imóveis</MenuItem>
+                                                    <MenuItem value="Equipamentos e Ferramentas">Equipamentos e Ferramentas</MenuItem>
+                                                    <MenuItem value="Telemóveis e Tablets">Telemóveis e Tablets</MenuItem>
+                                                    <MenuItem value="Desporto">Desporto</MenuItem>
+                                                    <MenuItem value="Tecnologia">Tecnologia</MenuItem>
+                                                    <MenuItem value="Emprego">Emprego</MenuItem>
+                                                    <MenuItem value="Outros">Outros</MenuItem>
+                                                </Select>
+                                                <FormHelperText>
+                                                    {errors.category}
+                                                </FormHelperText>
+                                            </FormControl>
                                         </Box>
                                     </Container>
                                     <Container maxWidth="md" className={classes.boxContainer}>
