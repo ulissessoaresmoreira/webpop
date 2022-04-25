@@ -9,6 +9,7 @@ import {
     FormControl,    
     FormHelperText,    
     IconButton,
+    Input,
     InputAdornment,
     InputLabel,
     MenuItem,
@@ -87,7 +88,11 @@ const useStyles = makeStyles((theme) => ({
     },
     price:{
         margin: '14px'
-    }    
+    },
+    inputLabel: {
+        fontWeight: 600,
+        color: theme.pallet.primary.main,
+    },  
 }))
 
 const validationSchema = yup.object().shape({
@@ -96,7 +101,10 @@ const validationSchema = yup.object().shape({
         .max(100, 'Digite no máximo 100 caracteres')
         .required('Campo obrigatório'),
     category: yup.string()
-        .required('Campo obrigatório')
+        .required('Campo obrigatório'),
+    description: yup.string()
+        .min(50, 'Digite pelo menos 50 caracteres')        
+        .required('Insira uma descrição para o anúncio'),
 
 })
 
@@ -132,6 +140,7 @@ const Publish = () =>{
                     initialValues={{
                         title: '',
                         category: '',
+                        description: '',
                     }}
                     validationSchema={validationSchema}
                     onSubmit={(values) => {
@@ -157,29 +166,28 @@ const Publish = () =>{
                                         </Typography>
 
                                     </Container>
+
+
                                     <Container maxWidth="md" className={classes.boxContainer}>
                                         <Box className={classes.box}>
-                                            <Typography component="h6" variant="h6" align="left" color="textprimary">
-                                                Título do anuncio
-                                            </Typography>
-                                            <TextField 
-                                                name="title"
-                                                values={values.title}
-                                                onChange={handleChange}
-                                                label="ex.: Bicicleta aro 22 com garantia"
-                                                size="small"
-                                                fullWidth
-                                                error={errors.title}
-                                                helperText={errors.title}
-                                            />                                            
-                                            <br /><br />
-                                            <Typography component="h6" variant="h6" align="left" color="textPrimary">
-                                                Categoria
-                                            </Typography>
-                                            <FormControl
-                                                fullWidth
-                                                errors={errors.category}
-                                            >
+
+                                            <FormControl fullWidth error={errors.title}>    
+                                                <InputLabel className={classes.inputLabel}>Título do anuncio</InputLabel>                                                
+                                                <Input 
+                                                    name="title"
+                                                    values={values.title}
+                                                    onChange={handleChange}
+                                                />                                            
+                                                <FormHelperText>
+                                                    {errors.title}                                                    
+                                                </FormHelperText>
+                                            </FormControl>
+
+                                            <br/><br/>
+
+                                            
+                                            <FormControl fullWidth error={errors.category}>
+                                                <InputLabel className={classes.inputLabel}> Categoria</InputLabel>
                                                 <Select 
                                                     name="category"
                                                     values={values.category}
@@ -207,7 +215,10 @@ const Publish = () =>{
                                                 </FormHelperText>
                                             </FormControl>
                                         </Box>
+
                                     </Container>
+
+
                                     <Container maxWidth="md" className={classes.boxContainer}>
                                         <Box className={classes.box}>
                                             <Typography component="h6" variant="h6" align="left" color="textPrimary">
@@ -252,18 +263,19 @@ const Publish = () =>{
 
                                     <Container maxWidth="md" className={classes.boxContainer}>
                                         <Box className={classes.box}>
-                                            <Typography component="h6" variant="h6" align="left" color="textPrimary">
-                                                Descrição
-                                            </Typography>
-                                            <Typography component="div" variant="body2" align="left" color="textPrimary">
-                                                Escreva os detalhes do seu anúncio
-                                            </Typography>
-                                            <TextField
-                                                multiline
-                                                rows={6}
-                                                variant="outlined"
-                                                fullWidth
-                                            />
+                                            
+                                            <FormControl error={errors.description} fullWidth>                                                
+                                                <InputLabel className={classes.inputLabel}>Escreva os detalhes do seu anúncio</InputLabel>
+                                                <Input
+                                                    name="description"
+                                                    multiline
+                                                    rows={6}
+                                                    variant="outlined"                                                    
+                                                />
+                                                <FormHelperText>
+                                                    {errors.description}
+                                                </FormHelperText>
+                                            </FormControl>
                                         </Box>
                                     </Container>
 
