@@ -236,19 +236,18 @@ const Publish = () =>{
 
                                     <Container maxWidth="md" className={classes.boxContainer}>
                                         <Box className={classes.box}>
+                                            
                                             <Typography component="h6" variant="h6" align="left" color="textPrimary">
                                                 Imagens
                                             </Typography>
                                             <Typography component="div" variant="body2" align="left" color="textPrimary">
                                                 A primeira imagem é a foto principal do seu anúncio. Arrasta e larga imagens para alterares a ordem.
-                                            </Typography>
-                                            
+                                            </Typography>                                            
                                             {
                                                 errors.files
                                                 ?<Typography variant="body2" color="error" gutterBottom>{errors.files}</Typography>
                                                 : null
                                             }
-
                                             <Box className={classes.thumbsContainer}>
                                                 <Box className={classes.dropzone} {...getRootProps()}>
                                                     <input name="files" {...getInputProps()} />
@@ -280,6 +279,7 @@ const Publish = () =>{
                                                     ))
                                                 }                            
                                             </Box>
+                                            
                                         </Box>
                                     </Container>
 
