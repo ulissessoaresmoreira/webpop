@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 
@@ -13,9 +12,7 @@ import {
     InputAdornment,
     InputLabel,
     MenuItem,
-    OutlinedInput,
-    Select,
-    TextField,
+    Select,    
     Typography, 
 } from '@material-ui/core'
 
@@ -114,32 +111,13 @@ const validationSchema = yup.object().shape({
         .required('Campo obrigatório'),
     phone: yup.number()
         .required('Campo obrigatório'),
+    files: yup.array()
+        .min(1, 'Insira pelo menos uma imagem')
+        .required('Campo obrigatório')
 })
 
 const Publish = () =>{
-    const classes = useStyles()
-    const [files, setFiles] = useState([])
-
-    const { getRootProps, getInputProps } = useDropzone({
-        accept: 'image/*',
-        onDrop: (acceptedFiles) =>{
-            const newFiles = acceptedFiles.map(file => {
-                return Object.assign(file, {
-                    preview: URL.createObjectURL(file)
-                })
-            })
-            
-            setFiles([
-                ...files,
-                ...newFiles,
-            ])
-        }
-    })
-
-    const handleRemoveFile = fileName => {
-        const newFileState = files.filter(file => file.name !== fileName)
-        setFiles(newFileState)
-    }
+    const classes = useStyles()  
 
     return(
         <>
@@ -153,6 +131,7 @@ const Publish = () =>{
                         email: '',
                         name: '',
                         phone: '',
+                        files: [],
                     }}
                     validationSchema={validationSchema}
                     onSubmit={(values) => {
@@ -165,8 +144,32 @@ const Publish = () =>{
                             errors,
                             handleChange,
                             handleSubmit,
+                            setFieldValue,
                         }) => {
-                            console.log(errors)
+                            
+                            // eslint-disable-next-line react-hooks/rules-of-hooks
+                            const { getRootProps, getInputProps } = useDropzone({
+                                accept: 'image/*',
+                                onDrop: (acceptedFiles) =>{
+                                    const newFiles = acceptedFiles.map(file => {
+                                        return Object.assign(file, {
+                                            preview: URL.createObjectURL(file)
+                                        })
+                                    })
+                                    
+                                    setFieldValue('files', [
+                                        ...files,
+                                        ...newFiles,
+                                    ])
+                                }
+                            })
+                        
+                            const handleRemoveFile = fileName => {
+                                const newFileState = files.filter(file => file.name !== fileName)
+                                setFieldValue('files', newFileState)
+                            }
+                            
+
                             return(
                                 <form onSubmit={handleSubmit}>                            
                                     <Container maxWidth="sm">
@@ -239,16 +242,23 @@ const Publish = () =>{
                                             <Typography component="div" variant="body2" align="left" color="textPrimary">
                                                 A primeira imagem é a foto principal do seu anúncio. Arrasta e larga imagens para alterares a ordem.
                                             </Typography>
+                                            
+                                            {
+                                                errors.files
+                                                ?<Typography variant="body2" color="error" gutterBottom>{errors.files}</Typography>
+                                                : null
+                                            }
+
                                             <Box className={classes.thumbsContainer}>
                                                 <Box className={classes.dropzone} {...getRootProps()}>
-                                                    <input {...getInputProps()} />
+                                                    <input name="files" {...getInputProps()} />
                                                     <Typography variant="body2" color="textPrimary" >
                                                         Adicionar Imagem
                                                     </Typography>
                                                 </Box>
 
                                                 {
-                                                    files.map((file, index) => (
+                                                    values.files.map((file, index) => (
                                                         <Box 
                                                         key={file.name}
                                                         className={classes.thumb}
