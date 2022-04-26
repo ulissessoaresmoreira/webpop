@@ -140,6 +140,7 @@ const Publish = () =>{
                 >
                     {
                         ({
+                            touched,
                             values,
                             errors,
                             handleChange,
@@ -158,14 +159,14 @@ const Publish = () =>{
                                     })
                                     
                                     setFieldValue('files', [
-                                        ...files,
+                                        ...values.files,
                                         ...newFiles,
                                     ])
                                 }
                             })
                         
                             const handleRemoveFile = fileName => {
-                                const newFileState = files.filter(file => file.name !== fileName)
+                                const newFileState = values.files.filter(file => file.name !== fileName)
                                 setFieldValue('files', newFileState)
                             }
                             
@@ -186,7 +187,7 @@ const Publish = () =>{
                                     <Container maxWidth="md" className={classes.boxContainer}>
                                         <Box className={classes.box}>
 
-                                            <FormControl fullWidth error={errors.title}>    
+                                            <FormControl error={errors.title && touched.title} fullWidth>    
                                                 <InputLabel className={classes.inputLabel}>Título do anuncio</InputLabel>                                                
                                                 <Input 
                                                     name="title"
@@ -194,14 +195,14 @@ const Publish = () =>{
                                                     onChange={handleChange}
                                                 />                                            
                                                 <FormHelperText>
-                                                    {errors.title}                                                    
+                                                    {errors.title && touched.title? errors.title: null}                                                    
                                                 </FormHelperText>
                                             </FormControl>
 
                                             <br/><br/>
 
                                             
-                                            <FormControl fullWidth error={errors.category}>
+                                            <FormControl error={errors.category && touched.category} fullWidth>
                                                 <InputLabel className={classes.inputLabel}> Categoria</InputLabel>
                                                 <Select 
                                                     name="category"
@@ -226,7 +227,7 @@ const Publish = () =>{
                                                     <MenuItem value="Outros">Outros</MenuItem>
                                                 </Select>
                                                 <FormHelperText>
-                                                    {errors.category}
+                                                    {errors.category && touched.category? errors.category: null}
                                                 </FormHelperText>
                                             </FormControl>
                                         </Box>
@@ -237,21 +238,21 @@ const Publish = () =>{
                                     <Container maxWidth="md" className={classes.boxContainer}>
                                         <Box className={classes.box}>
                                             
-                                            <Typography component="h6" variant="h6" align="left" color="textPrimary">
+                                            <Typography component="h6" variant="h6" align="left" color={errors.files && touched.files? 'error': 'text'}>
                                                 Imagens
                                             </Typography>
-                                            <Typography component="div" variant="body2" align="left" color="textPrimary">
+                                            <Typography component="div" variant="body2" align="left" color={errors.files && touched.files? 'error': 'text'}>
                                                 A primeira imagem é a foto principal do seu anúncio. Arrasta e larga imagens para alterares a ordem.
                                             </Typography>                                            
                                             {
-                                                errors.files
+                                                errors.files && touched.files
                                                 ?<Typography variant="body2" color="error" gutterBottom>{errors.files}</Typography>
                                                 : null
                                             }
                                             <Box className={classes.thumbsContainer}>
                                                 <Box className={classes.dropzone} {...getRootProps()}>
                                                     <input name="files" {...getInputProps()} />
-                                                    <Typography variant="body2" color="textPrimary" >
+                                                    <Typography variant="body2" color={errors.files && touched.files? 'error': 'text'} >
                                                         Adicionar Imagem
                                                     </Typography>
                                                 </Box>
@@ -286,7 +287,7 @@ const Publish = () =>{
                                     <Container maxWidth="md" className={classes.boxContainer}>
                                         <Box className={classes.box}>
                                             
-                                            <FormControl error={errors.description} fullWidth>                                                
+                                            <FormControl error={errors.description && touched.description} fullWidth>                                                
                                                 <InputLabel className={classes.inputLabel}>Escreva os detalhes do seu anúncio</InputLabel>
                                                 <Input
                                                     name="description"
@@ -295,7 +296,7 @@ const Publish = () =>{
                                                     rows={6}                                                    
                                                 />
                                                 <FormHelperText>
-                                                    {errors.description}
+                                                    {errors.description && touched.description? errors.description: null}
                                                 </FormHelperText>
                                             </FormControl>
                                         </Box>
@@ -303,7 +304,7 @@ const Publish = () =>{
 
                                     <Container maxWidth="md" className={classes.boxContainer}>
                                         <Box className={classes.box}>
-                                            <FormControl error={errors.price} fullWidth>
+                                            <FormControl error={errors.price && touched.price} fullWidth>
                                             <InputLabel className={classes.titlePrice}>
                                                 Preço de venda
                                             </InputLabel>   
@@ -315,7 +316,7 @@ const Publish = () =>{
                                                 labelWidth={40}
                                             />
                                             <FormHelperText>
-                                                {errors.price}
+                                                {errors.price && touched.price? errors.price: null}
                                             </FormHelperText>
                                             </FormControl>
                                         </Box>
@@ -324,7 +325,7 @@ const Publish = () =>{
                                     <Container maxWidth="md" className={classes.boxContainer}>
                                         <Box className={classes.box}>
 
-                                            <FormControl error={errors.name} fullWidth>
+                                            <FormControl error={errors.name && touched.name} fullWidth>
                                                 <InputLabel gutterBottom>
                                                     Nome
                                                 </InputLabel>
@@ -334,12 +335,12 @@ const Publish = () =>{
                                                     fullWidth
                                                     />
                                                 <FormHelperText>
-                                                    {errors.name}
+                                                    {errors.name && touched.name? errors.name: null}
                                                 </FormHelperText>
                                                 <br/><br/>
                                             </FormControl>
 
-                                            <FormControl error={errors.email} fullWidth>
+                                            <FormControl error={errors.email && touched.email} fullWidth>
                                                 <InputLabel>
                                                     E-mail
                                                 </InputLabel>
@@ -348,12 +349,12 @@ const Publish = () =>{
                                                     onChange={handleChange}
                                                     />
                                                 <FormHelperText>
-                                                    {errors.email}
+                                                    {errors.email && touched.email? errors.email: null}
                                                 </FormHelperText>
                                                 <br/><br/>
                                             </FormControl>
 
-                                            <FormControl error={errors.phone} fullWidth>
+                                            <FormControl error={errors.phone && touched.phone} fullWidth>
                                                 <InputLabel>
                                                     Número de contacto
                                                 </InputLabel>
@@ -362,7 +363,7 @@ const Publish = () =>{
                                                     onChange={handleChange}
                                                 />
                                                 <FormHelperText>
-                                                    {errors.phone}
+                                                    {errors.phone && touched.phone? errors.phone: null}
                                                 </FormHelperText>
                                             </FormControl>
 
