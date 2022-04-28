@@ -13,7 +13,7 @@ import {
 
 import TemplateDefault from '../../../src/templates/Default'
 
-import { initialValues, validationSchema } from './formValues'
+import {initialValues, validationSchema} from './formValues'
 import useStyles from './styles'
 
 
@@ -49,21 +49,21 @@ const SignUp = () => {
                                     </Container>
                                     <Container maxWidth="md" className={classes.box}>
                                         <Box>
-                                            <FormControl fullWidth error={errors.userName}>
+                                            <FormControl fullWidth error={errors.name && touched.name} className={classes.formControl}>
                                                 <InputLabel>Nome</InputLabel>
                                                 <Input 
-                                                    name="userName"
-                                                    values={values.userName}
+                                                    name="name"
+                                                    values={values.name}
                                                     onchange={handleChange}
                                                 />
                                                 <FormHelperText>
-                                                    {errors.userName}
+                                                    {errors.name && touched.name? errors.name: null}
                                                 </FormHelperText>
                                             </FormControl>
                                         </Box>
                                         <Box>
-                                            <FormControl fullWidth error={errors.email}>
-                                                <InputLabel>E-mail</InputLabel>
+                                            <FormControl fullWidth error={errors.email && touched.email} className={classes.formControl}>
+                                                <InputLabel>E-mail</InputLabel>  
                                                 <Input 
                                                     name="email"
                                                     type="email"
@@ -71,12 +71,12 @@ const SignUp = () => {
                                                     onchange={handleChange}
                                                 />
                                                 <FormHelperText>
-                                                    {errors.email}
+                                                    {errors.email && touched.email? errors.email: null}
                                                 </FormHelperText>
                                             </FormControl>
                                         </Box>
                                         <Box>
-                                            <FormControl fullWidth error={errors.password}>
+                                            <FormControl fullWidth error={errors.password && touched.password} className={classes.formControl}>
                                                 <InputLabel> Senha </InputLabel>
                                                 <Input
                                                     name="password"
@@ -85,12 +85,12 @@ const SignUp = () => {
                                                     onChange={handleChange}
                                                 />
                                                 <FormHelperText>
-                                                    {errors.password}
+                                                    {errors.password && touched.password? errors.password: null}
                                                 </FormHelperText>                                                
                                             </FormControl>
                                         </Box>
                                         <Box>
-                                            <FormControl fullWidth error={errors.confirmpassword}>
+                                            <FormControl fullWidth error={errors.confirmpassword && touched.confirmpassword} className={classes.formControl}>
                                                 <InputLabel> Confirme sua senha</InputLabel>
                                                 <Input 
                                                     name="confirmpassword"
@@ -99,7 +99,7 @@ const SignUp = () => {
                                                     onChange={handleChange}
                                                 />
                                                 <FormHelperText>
-                                                    {errors.confirmpassword}
+                                                    {errors.confirmpassword && touched.confirmpassword? errors.confirmpassword: null}
                                                 </FormHelperText>
                                             </FormControl>
                                         </Box>

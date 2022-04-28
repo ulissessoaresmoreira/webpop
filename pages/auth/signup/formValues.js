@@ -1,18 +1,18 @@
 import * as yup from 'yup'
 
 const initialValues = {
-    userNamer: '',
+    name: '',
     email: '',
     password: '',
     confirmpassword: ''
 }
 
 const validationSchema = yup.object().shape({
-    userName: yup.string()
+    name: yup.string()
         .required('Campo Obrigatório'),
     email: yup.string()
-        .email()
-        .required('Digite um e-mail válido'),
+        .email('Digite um e-mail válido')
+        .required('Campo obrigatório'),
     password: yup.string()
         .min(6, 'Mínimo 6 caracteres')
         .required('Campo Obrigatório'),
@@ -28,3 +28,4 @@ export {
     initialValues,
     validationSchema,
 }
+

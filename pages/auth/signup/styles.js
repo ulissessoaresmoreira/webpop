@@ -19,7 +19,10 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(3),
     },
     buttonRegister:{
-        marginTop: 40
+        margin: theme.spacing(3, 0, 2),
+    },
+    formControl:{
+        margin: theme.spacing(2)
     }
     
 }))
