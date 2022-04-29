@@ -166,15 +166,15 @@ const Publish = () =>{
                                     <Container maxWidth="md" className={classes.boxContainer}>
                                         <Box className={classes.box}>
 
-                                            <FormControl error={errors.name && touched.name} fullWidth>
+                                        <FormControl error={errors.name && touched.name} fullWidth>
                                                 <InputLabel gutterBottom>
                                                     Nome
                                                 </InputLabel>
                                                 <Input
                                                     name="name"                                                
                                                     onChange={handleChange}                                                
-                                                    fullWidth
-                                                    />
+                                                    values={values.name}
+                                                />
                                                 <FormHelperText>
                                                     {errors.name && touched.name? errors.name: null}
                                                 </FormHelperText>
@@ -187,6 +187,7 @@ const Publish = () =>{
                                                 </InputLabel>
                                                 <Input
                                                     name="email"
+                                                    type="email"
                                                     onChange={handleChange}
                                                     />
                                                 <FormHelperText>

@@ -49,17 +49,21 @@ const SignUp = () => {
                                     </Container>
                                     <Container maxWidth="md" className={classes.box}>
                                         <Box>
-                                            <FormControl fullWidth error={errors.name && touched.name} className={classes.formControl}>
-                                                <InputLabel>Nome</InputLabel>
+
+                                            <FormControl error={errors.name && touched.name} fullWidth className={classes.formControl}>
+                                                <InputLabel gutterBottom>
+                                                    Nome
+                                                </InputLabel>
                                                 <Input 
-                                                    name="name"
-                                                    values={values.name}
-                                                    onchange={handleChange}
+                                                    name="name" 
+                                                    onChange={handleChange}
+                                                    values={values.name} 
                                                 />
                                                 <FormHelperText>
                                                     {errors.name && touched.name? errors.name: null}
                                                 </FormHelperText>
                                             </FormControl>
+                                            
                                         </Box>
                                         <Box>
                                             <FormControl fullWidth error={errors.email && touched.email} className={classes.formControl}>
@@ -68,7 +72,7 @@ const SignUp = () => {
                                                     name="email"
                                                     type="email"
                                                     values={values.email}
-                                                    onchange={handleChange}
+                                                    onChange={handleChange}
                                                 />
                                                 <FormHelperText>
                                                     {errors.email && touched.email? errors.email: null}
