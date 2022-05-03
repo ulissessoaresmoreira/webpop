@@ -1,8 +1,10 @@
 import {Formik} from 'formik'
+import axios from 'axios'
 
 import {
     Box,
     Button,
+    CircularProgress,
     Container,
     FormControl,
     FormHelperText,
@@ -18,7 +20,16 @@ import useStyles from './styles'
 
 
 const SignUp = () => {
-    const classes = useStyles()      
+    const classes = useStyles()
+    
+    const handleFormSubmit = async values => {
+        const response = await axios.post('/api/users', values)
+        console.log(response)
+
+        if (response.data.success) {
+            console.log('Cadastrado com sucesso')
+        }
+    }
 
     return (
         <>
@@ -26,9 +37,7 @@ const SignUp = () => {
                 <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
-                    onSubmit={(values) => {
-                        console.log('enviado', values)
-                    }}
+                    onSubmit={handleFormSubmit}
                 >
                     {
                         ({
@@ -36,7 +45,8 @@ const SignUp = () => {
                             values,
                             errors,
                             handleChange,
-                            handleSubmit,                            
+                            handleSubmit,
+                            isSubmitting,                            
                         }) => {
 
                             return(
@@ -107,7 +117,24 @@ const SignUp = () => {
                                                 </FormHelperText>
                                             </FormControl>
                                         </Box>
-                                        <Button type="submit" variant="contained" color="primary" className={classes.buttonRegister} fullWidth>CADASTRAR</Button>
+
+                                        {
+                                            isSubmitting
+                                            ? (
+                                                <CircularProgress className={classes.loading}/>
+                                            ) : (
+                                                <Button
+                                                    type="submit"
+                                                    variant="contained"
+                                                    color="primary"
+                                                    className={classes.buttonRegister} 
+                                                    fullWidth
+                                                >
+                                                    CADASTRAR
+                                                </Button>
+                                            )
+                                        }
+                                        
                                     </Container>
                                 </form>
                             )

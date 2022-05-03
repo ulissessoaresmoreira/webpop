@@ -23,6 +23,11 @@ const useStyles = makeStyles((theme) => ({
     },
     formControl:{
         margin: theme.spacing(2)
+    },
+    loading: {
+        display: 'block',
+        margin: '10px auto'
+
     }
     
 }))
