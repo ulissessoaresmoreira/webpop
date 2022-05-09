@@ -1,6 +1,7 @@
 import {Formik} from 'formik'
 import axios from 'axios'
 import {useRouter} from 'next/router'
+import {signIn, session} from 'next-auth/react'
 
 import {
     Box,
@@ -25,8 +26,14 @@ const Signin = () => {
     const classes = useStyles()
     const router = useRouter()
     const {setToasty} = useToasty()
+
+    console.log(session)
     
     const handleFormSubmit = async values => {
+        signIn('credentials',{
+            email: values.email,
+            password: values.password,
+        })
     }
 
     return (
