@@ -1,19 +1,20 @@
 import axios from "axios";
 import NextAuth from "next-auth"
 
-import CredentialsProvider from "next-auth/providers/credentials";
+
+import CredentialsProvider from "next-auth/providers/credentials"
 
 
 export default NextAuth({
 
         providers: [
             CredentialsProvider({
-                name: "Credentials",
+                name: "Credentials",                
                 async authorize(credentials) {
-                    const res = axios.post('api/auth/signin', {
+                    const res = axios.post('/api/auth/signin', {
                         method: 'POST',
                         body: JSON.stringify(credentials),
-                        headers: {'Content-Type': 'application/json'}
+                        headers: { 'Content-Type': 'application/json' }
                     })
 
                     const user = res.data
@@ -21,7 +22,7 @@ export default NextAuth({
                     if (user) {                  
                         return user
                     } else {                  
-                        return null
+                        throw '/aut/signin?i=1'
                     }
                 }
 

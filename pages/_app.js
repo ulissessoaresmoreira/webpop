@@ -10,7 +10,12 @@ import theme from '../src/theme';
 
 
 export default function MyApp(props) {
-  const { Component, pageProps } = props;
+  const { Component, pageProps } = props  
+
+//export default function MyApp ({
+//  Component,
+//  pageProps: {session, ...pageProps},
+//}) {  
 
   return (
     <React.Fragment>

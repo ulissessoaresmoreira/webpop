@@ -1,6 +1,7 @@
+import UsersModel from '../../models/users'
 import dbConnect from '../../utils/dbconect'
 import { compare } from '../../utils/password'
-import UsersModel from '../../models/users'
+
 
 
 const post = async (req, res) => {
@@ -23,7 +24,7 @@ const post = async (req, res) => {
         return res.status(200).json({
             _id: user.id,
             name: user.name,
-            email: user.email
+            email: user.email,
         })
     }
 
