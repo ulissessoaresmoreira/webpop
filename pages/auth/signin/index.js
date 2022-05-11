@@ -1,7 +1,7 @@
 import {Formik} from 'formik'
 import axios from 'axios'
 import {useRouter} from 'next/router'
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signIn } from "next-auth/react"
 
 
 import {
@@ -21,15 +21,18 @@ import TemplateDefault from '../../../src/templates/Default'
 import {initialValues, validationSchema} from './formValues'
 import useToasty from '../../../src/contexts/Toasty'
 import useStyles from './styles'
+import { Alert } from '@mui/material'
+
 
 
 const Signin = () => {
     const classes = useStyles()
     const router = useRouter()
     const {setToasty} = useToasty()
+    const { data: session } = useSession()
     
-
     
+    console.log(session)    
     
         const handleFormSubmit = async values => {
             signIn('credentials',{
@@ -60,7 +63,16 @@ const Signin = () => {
                         }) => {
 
                             return(
-                                <form onSubmit={handleSubmit}>                                
+                                <form onSubmit={handleSubmit}> 
+                                    {
+                                        router.query.i === '1'
+                                        ? (
+                                            <Alert severity="error" className={classes.errorMessagem}>
+                                                Usuário ou senha inválidos
+                                            </Alert>
+                                        )
+                                        : null
+                                    }                               
                                     <Container maxWidth="sm" className={classes.title}>
                                         <Typography constant="h2" variant="h2" align="center" color="textPrimary">Aceda sua conta</Typography>
                                     </Container>

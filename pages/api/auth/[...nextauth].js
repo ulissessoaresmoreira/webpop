@@ -10,12 +10,8 @@ export default NextAuth({
         providers: [
             CredentialsProvider({
                 name: "Credentials",                
-                async authorize(credentials) {
-                    const res = axios.post('/api/auth/signin', {
-                        method: 'POST',
-                        body: JSON.stringify(credentials),
-                        headers: { 'Content-Type': 'application/json' }
-                    })
+                async authorize(credentials, req) {
+                    const res = axios.post('http://localhost:3000/api/auth/signin', credentials)
 
                     const user = res.data
 
@@ -28,6 +24,7 @@ export default NextAuth({
 
                 })
         ],
+
     
     session: {
         jwt: true,
