@@ -29,16 +29,16 @@ const Signin = () => {
     const classes = useStyles()
     const router = useRouter()
     const {setToasty} = useToasty()
-    const { data: session } = useSession()
+    const { data: getSession } = useSession()
     
     
-    console.log(session)    
+    console.log(getSession)    
     
         const handleFormSubmit = async values => {
             signIn('credentials',{
                 email: values.email,
                 password: values.password,
-                callbackUrl: 'http://localhost:3000/user/dashboard'
+                callbackUrl: 'http://localhost:3000/user/dashboard'                
             })
         }        
     
@@ -76,13 +76,11 @@ const Signin = () => {
                                     <Container maxWidth="sm" className={classes.title}>
                                         <Typography constant="h2" variant="h2" align="center" color="textPrimary">Aceda sua conta</Typography>
                                     </Container>
+                                    <Container>
+                                        <button onClick={() => signIn('google')}>Google</button>
+                                    </Container>
                                     
-                                    <Container maxWidth="md" className={classes.box}>
-                                        <Box>
-
-                                            
-                                            
-                                        </Box>
+                                    <Container maxWidth="md" className={classes.box}>                                        
                                         <Box>
                                             <FormControl fullWidth error={errors.email && touched.email} className={classes.formControl}>
                                                 <InputLabel>E-mail</InputLabel>  

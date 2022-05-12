@@ -7,7 +7,6 @@ const initialValues = {
 }
 
 const validationSchema = yup.object().shape({
-    
     email: yup.string()
         .email('Digite um e-mail válido')
         .required('Campo obrigatório'),
@@ -15,8 +14,6 @@ const validationSchema = yup.object().shape({
         .min(6, 'Mínimo 6 caracteres')
         .required('Campo Obrigatório'),    
 })
-
-
 
 export {
     initialValues,
