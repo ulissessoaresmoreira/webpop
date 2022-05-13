@@ -9,13 +9,13 @@ import theme from '../src/theme';
 
 
 
-export default function MyApp(props) {
-  const { Component, pageProps } = props  
+//export default function App(props) {
+//  const { Component, pageProps } = props  
 
-//export default function MyApp ({
-//  Component,
-//  pageProps: {session, ...pageProps},
-//}) {  
+export default function App ({
+  Component,
+  pageProps: {session, ...pageProps},
+}) {  
 
   return (
     <React.Fragment>
@@ -23,7 +23,7 @@ export default function MyApp(props) {
         
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <SessionProvider session={pageProps.session}>
+      <SessionProvider session={session}>
         <ThemeProvider theme={theme}>
           <ToastyProvider>
             <CssBaseline />
@@ -35,7 +35,7 @@ export default function MyApp(props) {
   );
 }
 
-MyApp.propTypes = {
+App.propTypes = {
   Component: PropTypes.elementType.isRequired,
   emotionCache: PropTypes.object,
   pageProps: PropTypes.object.isRequired,

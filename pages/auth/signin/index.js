@@ -1,4 +1,5 @@
 import {Formik} from 'formik'
+import Image from 'next/image'
 import axios from 'axios'
 import {useRouter} from 'next/router'
 import { useSession, signIn } from "next-auth/react"
@@ -31,8 +32,10 @@ const Signin = () => {
     const {setToasty} = useToasty()
     const { data: getSession } = useSession()
     
-    
     console.log(getSession)    
+
+    const handleGoogleLogin = () => {
+        signIn('google',{callbackUrl: 'http://localhost:3000/user/dashboard'})}
     
         const handleFormSubmit = async values => {
             signIn('credentials',{
@@ -40,9 +43,7 @@ const Signin = () => {
                 password: values.password,
                 callbackUrl: 'http://localhost:3000/user/dashboard'                
             })
-        }        
-    
-    
+        }
 
     return (
         <>
@@ -75,12 +76,30 @@ const Signin = () => {
                                     }                               
                                     <Container maxWidth="sm" className={classes.title}>
                                         <Typography constant="h2" variant="h2" align="center" color="textPrimary">Aceda sua conta</Typography>
-                                    </Container>
-                                    <Container>
-                                        <button onClick={() => signIn('google')}>Google</button>
-                                    </Container>
+                                    </Container>                                    
                                     
-                                    <Container maxWidth="md" className={classes.box}>                                        
+                                    <Container maxWidth="md" className={classes.box}>
+                                        <Box className={classes.buttonGoogle}>
+                                            <Button 
+                                                variant='contained'
+                                                color='primary'
+                                                startIcon={
+                                                    <Image 
+                                                        src="/images/google.jpg"
+                                                        width={20}
+                                                        height={20}
+                                                        alt="Login google"
+                                                    />
+                                                }
+                                                onClick={handleGoogleLogin}>
+                                                Entrar com Google
+                                            </Button>
+                                        </Box>
+
+                                        <Box className={classes.orSeparator}>
+                                            <span>ou</span>
+                                        </Box>
+
                                         <Box>
                                             <FormControl fullWidth error={errors.email && touched.email} className={classes.formControl}>
                                                 <InputLabel>E-mail</InputLabel>  
