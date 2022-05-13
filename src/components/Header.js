@@ -2,13 +2,14 @@ import * as React from 'react'
 import {useState} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import Link from 'next/link'
+import {useSession} from 'next-auth/react'
 
 import {  
   AppBar,  
   Container,
   Toolbar,
   Typography,
-  Button,
+  Button, 
   IconButton,
   Avatar,
   Menu,
@@ -26,6 +27,12 @@ const useStyles = makeStyles((theme) => ({
   avatarIcon: {
     marginRight: 6
   },
+  userName: {
+    marginLeft: 8
+  },
+  headButton: {
+    marginRight: 10,
+  },
   logo: {
     textDecoration: 'none',
     color: 'white',
@@ -42,7 +49,9 @@ export default function ButtonAppBar() {
   const [anchorUserMenu, setAnchorUserMenu] = useState(false)
 
   const openUserMenu = Boolean(anchorUserMenu)
-
+  
+  const { data: getSession } = useSession()
+  
 
   return (
     <>
@@ -55,21 +64,25 @@ export default function ButtonAppBar() {
                   <a className={classes.logo}> WebPoP </a>                
               </Link>
             </Typography>
-            <Link href="/user/publish" passHref>
-              <Button color="inherit" variant="outlined">
+            <Link href={getSession? "/user/publish" : '/auth/signin'} passHref>
+              <Button color="inherit" variant="outlined" className={classes.headButton}>
                 Anunciar e vender
               </Button>
             </Link>
-            <IconButton color="secondary" onClick={(e) => setAnchorUserMenu(e.currentTarget)} >
-              {
-                true === true
-                ?<Avatar className={classes.avatarIcon} src=""/>
-                :<AccountCircle className={classes.avatarIcon} />
-              }
-              <Typography component="h5" variant="subtitle1" color="textPrimary">
-                Ulisses Soares
-              </Typography>
-            </IconButton>
+            {
+              getSession? (
+                        <IconButton color="secondary" onClick={(e) => setAnchorUserMenu(e.currentTarget)} >
+                          {
+                            getSession.user.image
+                            ?<Avatar className={classes.avatarIcon} src={getSession.user.image}/>
+                            :<AccountCircle className={classes.avatarIcon} />
+                          }
+                          <Typography component="h5" variant="subtitle1" color="textPrimary" className={classes.userName}>
+                            {getSession.user.name}
+                          </Typography>
+                        </IconButton>
+              ) : null
+            }
             <Menu 
               anchorEl={anchorUserMenu}
               id="account-menu"
