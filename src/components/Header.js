@@ -2,7 +2,7 @@ import * as React from 'react'
 import {useState} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import Link from 'next/link'
-import {useSession} from 'next-auth/react'
+import {useSession, signOut} from 'next-auth/react'
 
 import {  
   AppBar,  
@@ -103,7 +103,7 @@ export default function ButtonAppBar() {
                 <MenuItem>Publicar novo anúncio</MenuItem>
               </Link>
               <Divider className={classes.divider}/>
-              <MenuItem>Sair</MenuItem>
+              <MenuItem onClick={() => signOut({callbackUrl: '/'})}>Sair</MenuItem>
             </Menu>
           </Toolbar>
         </Container>
