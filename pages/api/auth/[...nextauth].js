@@ -17,7 +17,7 @@ export default NextAuth({
             CredentialsProvider({
                 name: "Credentials",                
                 async authorize(credentials, req) {
-                    const res = axios.post('http://localhost:3000/api/auth/signin', credentials)
+                    const res = axios.post(`${process.env.APP_URL}/api/auth/signin`, credentials)
 
                     const user = res.data
 

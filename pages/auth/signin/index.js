@@ -42,7 +42,7 @@ const Signin = () => {
             signIn('credentials',{
                 email: values.email,
                 password: values.password,
-                callbackUrl: 'http://localhost:3000/user/dashboard'                
+                callbackUrl: 'http://localhost:3000/user/dashboard'                 
             })
         }
 
@@ -158,5 +158,7 @@ const Signin = () => {
         </>
     )
 }
+
+
 
 export default Signin
