@@ -8,10 +8,13 @@ const post = async (req, res) => {
     const form = new formidable.IncomingForm()
 
     form.parse(req, (error, fields, data) => {
-        console.log('chegou no form parses')
+        if(error) {
+            return res.status(500).json({success: true})
+        }
         
+        console.log(fields, data)
 
-        res.status(200)
+        res.status(200).json({success: true})
     })
 }
 

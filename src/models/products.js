@@ -10,19 +10,19 @@ const schema = new mongoose.Schema({
         type: String,
         required: [true, 'O campo "título do anúncio" é obrigatório'],
     },
-    category:{
+    category: {
         type: String,
         required: [true, 'O campo "categoria" é obrigatório '],
     },
-    description:{
+    description: {
         type: String,
         required: [true, 'O campo "description" é obrigatório']
     },
-    price:{
+    price: {
         type: Number,
         required: [true, 'O campo "number" é obrigatório']
     },
-    user:{
+    user: {
         id: String,
         name: String,
         email: String,
@@ -35,4 +35,8 @@ const schema = new mongoose.Schema({
     }
 })
 
-export default mongoose.models.users || mongoose.model('products', schema)
+export default mongoose.models.products || mongoose.model('products', schema)
+
+
+
+

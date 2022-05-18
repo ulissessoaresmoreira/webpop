@@ -50,6 +50,7 @@ const Publish = () =>{
     const handleFormSubmit = (values) =>{
         const formData = new FormData()
         console.log(values)
+        
 
         for(let field in values) {
             if(field === 'files'){
@@ -57,7 +58,7 @@ const Publish = () =>{
                     formData.append('files', file)
                 })
             } else {
-                formData.append('field', values[field])
+                formData.append(field, values[field])
             }
         }
             
