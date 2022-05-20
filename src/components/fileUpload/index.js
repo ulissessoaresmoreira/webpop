@@ -9,12 +9,10 @@ const FileUpload = ({ files, errors, touched, setFieldValue}) => {
 
     const { getRootProps, getInputProps } = useDropzone({
         accept: 'image/*',
-        onDrop: (acceptedFiles) =>{
-            const newFiles = acceptedFiles.map(file => {
-                return Object.assign(file, {
+        onDrop: (acceptedFile) =>{
+            const newFiles = acceptedFile.map(file => Object.assign(file, {
                     preview: URL.createObjectURL(file)
-                })
-            })
+            }))
             
             setFieldValue('files', [
                 ...files,
