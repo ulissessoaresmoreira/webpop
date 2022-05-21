@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const filesSchema = new mongoose.Schema({
-    type: String,
+    name: String,
     path: String,
 })
 

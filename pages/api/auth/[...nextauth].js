@@ -40,6 +40,17 @@ export default NextAuth({
         secret: process.env.JWT_TOKEN,
     },
 
+    callbacks: {
+        async jwt({ token, account }) {
+          
+          if (account) {
+            token.accessToken = account.access_token
+          }
+          return token
+        }
+      },
+
+
     database: process.env.MONGODB_URI
 })
 

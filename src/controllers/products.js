@@ -14,7 +14,7 @@ const post = async (req, res) => {
         keepExtensions: true,
     })
 
-    form.parse(req, (error, fields, data) => {
+    form.parse(req, async (error, fields, data) => {
         if(error) {
             return res.status(500).json({success: true})
         }
@@ -25,6 +25,8 @@ const post = async (req, res) => {
         const filesToRename = files instanceof Array
         ? files
         : [files]
+
+        const filesToSave = []
 
         filesToRename.forEach(file => {
             const timestamp = Date.now()
@@ -43,11 +45,44 @@ const post = async (req, res) => {
                     return res.status(500).json({success: false})
                 }
             })
+
+            filesToSave.push({
+                name: filename,
+                path: newpath,
+            })
         })
 
-        
+        const {
+            title,
+            category,
+            description,
+            price,
+            name,
+            email,
+            phone,
+        } = fields
 
-        res.status(200).json({success: true})
+        const product = new ProductsModel ({
+            title,
+            category,
+            description,
+            price,
+            user:{
+                name,
+                email,
+                phone,
+            },
+            files: filesToSave,
+        })
+
+        const register = await product.save()
+
+        if(register){
+            res.status(201).json({success: true})
+        } else {
+            res.status(500).json({success: false})
+        }
+
     })
 }
 
