@@ -41,13 +41,18 @@ export default NextAuth({
     },
 
     callbacks: {
-        async jwt({ token, account }) {
+        async jwt({ token, user }) {
           
-          if (account) {
-            token.accessToken = account.access_token
+          if (user) {
+            token.accessToken = user.id
           }
-          return token
-        }
+          return token          
+        },
+        async session({ session, token }) {
+            // Send properties to the client, like an access_token from a provider.
+            session.userId = token.accessToken
+            return session
+          }
       },
 
 
