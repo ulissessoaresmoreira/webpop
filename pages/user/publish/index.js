@@ -32,13 +32,11 @@ const Publish = ({userId, image}) =>{
     const {setToasty} = useToasty()
     
     const formValues = {
-        ...initialValues,        
+        ...initialValues,
+        userId,
+        image,        
     }
 
-    formValues.userId = userId
-    formValues.image = image
-
-    
 
     const handleSuccess = () => {
         setToasty({
@@ -288,15 +286,16 @@ Publish.requireAuth = true
 
 
 export async function getServerSideProps(req) {
-    const {userId, user} = await getSession(req)
+    const {userId, user} = await getSession(req) 
     
     
     return { 
         props: {
             userId,
             image: user.image    
-        } }
-  }
+        } 
+    }
+}
 
 
 
